@@ -1,0 +1,30 @@
+.DS_Store
+/passbuff/node_modules
+/server/__pycache__
+/dist
+
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.pkl
+node_modules
+
+# models
+/server/backend/rfc.pkl
+/server/backend/vectorizer.pkl
