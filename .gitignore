@@ -29,3 +29,5 @@ node_modules
 # models
 /server/backend/rfc.pkl
 /server/backend/vectorizer.pkl
+/server/backend/rfc.ipynb
+/server/backend/vectorizer.ipynb
