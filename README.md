@@ -1,7 +1,7 @@
 # PassBuff
-### [Live Demo](pass-buff.web.app)
+### [Live Demo](https://pass-buff.web.app)
 
-[![Website Screenshot](mainpage.png)](pass-buff.web.app)
+[![Website Screenshot](mainpage.png)](https://pass-buff.web.app)
 
 ## About
 PassBuff (Password Buffer) is an application which strengthens common or weak passwords by suggesting "buffs" as well as hints for improvement. The strength of the password, ranging from 1 to 7, is gauged using the [zxcvbn](https://github.com/dwolfhub/zxcvbn-python) library in addition to a natural language processing model based off of [Kaggle's Password Strength Classifier Dataset](https://www.kaggle.com/datasets/bhavikbb/password-strength-classifier-dataset).
