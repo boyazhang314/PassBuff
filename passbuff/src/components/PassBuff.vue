@@ -71,7 +71,7 @@
                 <div class="buff-amount">+{{ this.$store.state.buffs[2][2] }}</div>
             </div>
         </div>
-        <button class="reroll-button" v-if="this.$store.state.buffs[0] && this.$store.state.password" @click="getPassword()">
+        <button class="reroll-button" v-if="this.$store.state.buffs && this.$store.state.buffs[0] && this.$store.state.password" @click="postPassword({'password': this.$store.state.password})">
             Reroll
             <div class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
@@ -81,11 +81,6 @@
             </div> 
         </button>
         <button class="restart-button" v-if="this.$store.state.score === 7" @click="restart()">Restart</button>
-        <!-- <p>{{ this.$store.state.password }}</p>
-        <p>{{ this.$store.state.score }}</p>
-        <p>{{ this.$store.state.buffs }}</p>
-        <p>{{ this.$store.state.previous }}</p> -->
-        <!-- <p>{{ msg }}</p> -->
     </div>
 </template>
 
@@ -116,27 +111,19 @@ export default {
         }
     },
     methods: {
-        getPassword() {
-            const path = "http://localhost:5000/power"
-            axios.get(path)
-                .then(async (res) => {
-                    this.msg = await res.data["power"]
-                    const score = await res.data["power"]["score"]
-                    const buffs = await res.data["power"]["buffs"]
-                    const advice = await res.data["power"]["advice"]
-                    this.$store.commit("changeScore", score + 1)
-                    this.$store.commit("changeBuffs", buffs)
-                    this.$store.commit("changeAdvice", advice)
-                })
-                .catch((err) => {
-                    console.error(err);
-                })
-        },
         postPassword(pw) {
-        const path = "http://localhost:5000/power"
+        const path = "https://passbuff-api.herokuapp.com/power"
+        console.log(pw)
         axios.post(path, pw)
-            .then(() => {
-                this.getPassword()
+            .then(async (res) => {
+                console.log(res)
+                this.msg = await res.data["power"]
+                const score = await res.data["power"]["score"]
+                const buffs = await res.data["power"]["buffs"]
+                const advice = await res.data["power"]["advice"]
+                this.$store.commit("changeScore", score + 1)
+                this.$store.commit("changeBuffs", buffs)
+                this.$store.commit("changeAdvice", advice)
             })
             .catch((err) => {
                 console.error(err)
@@ -189,8 +176,8 @@ export default {
         }
     },
     watch: {
-        text: async function() {
-            await this.postPassword({"password": this.$store.state.password})
+        text: function() {
+            this.postPassword({"password": this.$store.state.password})
         }
     },
     created() {
@@ -216,7 +203,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@800&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Rubik:wght@500,800&display=swap");
 
 .passbuff-container {
     height: fit-content;
@@ -281,7 +268,7 @@ export default {
 
 .score {
     font-size: 3vh;
-    font-family: url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
     color: white;
     user-select: none;
     margin: 1%;
@@ -297,14 +284,14 @@ export default {
 
 .passbuff-subtitle {
     font-size: 5vh;
-    font-family: url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
     color: white;
     user-select: none;
 }
 
 .hint-button {
     font-size: 3vh;
-    font-family: url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
     color: white;
     user-select: none;
 
@@ -350,7 +337,7 @@ export default {
     align-items: center;
 
     font-size: 2vh;
-    font-family: url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
     color: rgb(255, 255, 255);
     cursor: pointer;
 
@@ -384,10 +371,11 @@ export default {
     justify-content: center;
     align-items: center;
 
-    height: 10vh;
-    width: 12vw;
+    height: 11vh;
+    width: 13vw;
     font-size: 3vh;
-    font-family: url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-weight: 500;
+    font-family: 'Rubik', sans-serif;
     color: rgb(255, 255, 255);
     cursor: pointer;
 
@@ -422,7 +410,7 @@ export default {
     border-radius: 10vh;
 
     font-size: 5vh;
-    font-family: url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
 
     padding: 3vh;
     padding-left: 7vh;
@@ -464,7 +452,7 @@ export default {
     padding-left: 3vh;
     padding-right: 3vh;
 
-    font-family: url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
     font-size: 3vh;
 
     border: none;
@@ -510,15 +498,16 @@ export default {
     transition: 200ms ease-out;
 }
 .buff-name {
+    font-weight: bold;
     font-family: 'Rubik', sans-serif;
     font-size: 3vh;
 }
 .buff-string {
-    font-family: url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
     font-size: 3vh;
 }
 .buff-amount {
-    font-family: url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+    font-family: 'Rubik', sans-serif;
     font-size: 4vh;
 }
 .buff:hover {

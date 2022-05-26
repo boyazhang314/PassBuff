@@ -27,12 +27,12 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 @app.route('/power', methods=['GET', 'POST'])
 def buffer():
     response = {'status': 'success'}
-    if request.method == 'POST':
-        post = request.get_json()
-        PASSWORD[0]["password"] = post.get("password")
-        response['message'] = "Password Updated!"
-    else:
-        response['power'] = power(PASSWORD[0]["password"])
+    print("post")
+    post = request.get_json()
+    
+    print(post.get("password"))
+    PASSWORD[0]["password"] = post.get("password")
+    response['power'] = power(post.get("password"))
     # json
     response = jsonify(response)
     response.headers["Access-Control-Allow-Origin"] = "*"

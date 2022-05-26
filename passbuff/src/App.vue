@@ -12,9 +12,11 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Rubik:wght@500,800&display=swap");
+
 body {
   margin: 0;
-  padding: none;;
+  padding: none;
   box-sizing: border-box;
 }
 
