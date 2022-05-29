@@ -1,5 +1,6 @@
 # PassBuff
 ### [Live Demo](https://pass-buff.web.app)
+(NOTE: May take a while to wake up the Heroku server :D)
 
 [![Website Screenshot](mainpage.png)](https://pass-buff.web.app)
 
